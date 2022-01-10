@@ -19,6 +19,21 @@ module.exports = merge(common, {
     minimizer: [
       `...`,
       new CssMinimizerPlugin() // 压缩css
-    ]
+    ],
+    splitChunks: {
+      chunks: 'all',
+      minSize: 30000,
+      minChunks: 1,
+      maxAsyncRequests: 5,
+      maxInitialRequests: 3,
+      name: false,
+      cacheGroups: {
+        vendor: {
+          test: /[\\/]node_modules[\\/]/,
+          name: 'vendor',
+          chunks: 'initial'
+        }
+      }
+    }
   }
 });

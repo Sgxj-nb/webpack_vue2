@@ -5,13 +5,16 @@
 </template>
 <script>
 export default {
-  name: 'App',
+  name: "App",
   data() {
     return {};
   },
-  created() {}
+  created() {},
 };
 </script>
 <style>
-/* @import url('@/css/index.css'); */
+body {
+  padding: 0px;
+  margin: 0px;
+}
 </style>

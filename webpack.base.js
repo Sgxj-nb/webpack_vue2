@@ -3,16 +3,19 @@ const HtmlWebpackPlugin = require('html-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const compressionWebpackPlugin = require('compression-webpack-plugin');
 const vueLoaderPlugin = require('vue-loader/lib/plugin');
+const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 
 module.exports = {
   entry: path.resolve(__dirname, './src/main.js'), // 入口文件
   output: {
     // 输出文件
     filename: '[name].js', // [name] 指entry属性名字, 默认为main
-    path: path.resolve(__dirname, '../dist')
+    path: path.resolve(__dirname, '../dist'),
+    assetModuleFilename: 'img/[hash][ext][query]'
   },
   resolve: {
     alias: {
+      vue$: 'vue/dist/vue.esm.js',
       '@': path.resolve(__dirname, './src')
     },
     // 如果有多个文件有相同的名字，但后缀名不同，webpack 会解析列在数组首位的后缀的文件 并跳过其余的后缀。
@@ -41,28 +44,36 @@ module.exports = {
         ],
         exclude: /node_modules/
       },
-
       {
-        // 用正则去匹配要用该 loader 转换的 CSS 文件
-        test: /\.css$/,
-        exclude: path.resolve(__dirname, 'node_modules'),
-        use: [MiniCssExtractPlugin.loader, 'css-loader', 'postcss-loader'] // 切记从右向左解析原则
-      },
-      {
-        test: /.less$/,
+        test: /\.(css|less)$/,
         exclude: path.resolve(__dirname, 'node_modules'),
         use: [
           MiniCssExtractPlugin.loader,
           'css-loader',
-          'postcss-loader',
+          {
+            loader: 'postcss-loader'
+          },
           'less-loader'
         ]
+      },
+      {
+        type: 'asset/resource',
+        test: /\.(png|svg|jpg|jpeg|gif)$/i,
+        generator: {
+          filename: 'images/[name].[hash:5][ext]'
+        },
+        parser: {
+          dataUrlCondition: {
+            maxSize: 8 * 1024 // 限制于 8kb
+          }
+        }
       }
     ]
   },
 
   plugins: [
     new vueLoaderPlugin(),
+    new CleanWebpackPlugin(),
     new compressionWebpackPlugin({
       test: /\.(js|css|html)$/,
       threshold: 10240,

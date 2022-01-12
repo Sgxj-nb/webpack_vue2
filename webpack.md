@@ -53,3 +53,16 @@
   - `npm i core-js -S`(安装的什么版本就要写什么版本 是最好的要简写也可以)
 - 安装多进程并发来提升构造速度
   - `npm install terser-webpack-plugin --save-dev` 
+
+## 请求部分
+
+- 安装axios
+  - `npm install axios --save`
+```
+值得注意的是我这里暂时不安装qs了如有需要可以自己安装即可
+```
+
+## Vuex部分
+
+- 安装Vuex
+  - `npm install vuex --save` 

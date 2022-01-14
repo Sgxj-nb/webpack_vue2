@@ -8,6 +8,7 @@
       <div>
         <button @click="addinfo">点击</button>
       </div>
+      <div class="quanzhaninfo">字体大小</div>
     </div>
   </div>
 </template>
@@ -41,4 +42,8 @@ export default {
 };
 </script>
 
-<style></style>
+<style scoped>
+.quanzhaninfo {
+  font-size: 12px;
+}
+</style>

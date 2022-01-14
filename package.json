@@ -38,9 +38,11 @@
     "webpack-dev-server": "^4.7.2"
   },
   "dependencies": {
+    "amfe-flexible": "^2.2.1",
     "axios": "^0.24.0",
     "core-js": "^3.20.2",
     "path": "^0.12.7",
+    "postcss-plugin-px2rem": "^0.8.1",
     "vue": "^2.6.14",
     "vue-router": "^3.5.3",
     "vuex": "^3.6.2",

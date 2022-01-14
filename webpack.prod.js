@@ -1,4 +1,5 @@
 // webpack(打包脚本)
+const TerserPlugin = require('terser-webpack-plugin');
 const { merge } = require('webpack-merge');
 const path = require('path');
 const common = require('./webpack.base.js');
@@ -18,7 +19,16 @@ module.exports = merge(common, {
     nodeEnv: 'production',
     minimizer: [
       `...`,
-      new CssMinimizerPlugin() // 压缩css
+      new CssMinimizerPlugin(), // 压缩css
+      new TerserPlugin({
+        terserOptions: {
+          compress: {
+            drop_console: true
+          }
+        },
+        sourceMap: true,
+        parallel: true
+      })
     ],
     splitChunks: {
       chunks: 'all',

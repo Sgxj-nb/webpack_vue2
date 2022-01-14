@@ -66,3 +66,12 @@
 
 - 安装Vuex
   - `npm install vuex --save` 
+
+## 移动端自适应
+
+- `npm i amfe-flexible --S`
+- `npm i --save postcss-plugin-px2rem`
+
+## 线上关闭consl
+
+- `npm i terser-webpack-plugin`
